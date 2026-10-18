@@ -6,6 +6,7 @@ from typing import Any, Literal, Self
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
+from backtest_engine.accounting.funding_policy import FundingConfig
 from backtest_engine.core.validation import validate_choice as _validate_choice
 from backtest_engine.data.instrument_registry import InstrumentSpec, MarginTierSpec
 from backtest_engine.data.session_model import SESSION_FILTERS, SHORT_DAY_POLICIES
@@ -184,7 +185,7 @@ class MultiInstrumentPortfolioConfig(BaseModel):
         return self
 
 
-class MultiInstrumentExecutionConfig(BaseModel):
+class MultiInstrumentExecutionConfig(FundingConfig):
     partial_fill_policy: Literal["allow", "reject"] = "allow"
     engine: str = "v3"
     timing: str = "signal_close_to_next_bar_close"
@@ -208,10 +209,6 @@ class MultiInstrumentExecutionConfig(BaseModel):
     trading_days_per_year: int | None = Field(default=None, gt=0)
     data_mode: str = "bar"
     liquidity_role: str = "taker"
-    funding_rate_column: str = "funding_rate"
-    default_funding_rate: float = 0.0
-    funding_event_column: str = "funding_event"
-    require_funding_event_flag: bool = True
     end_of_data_position_policy: Literal["reject", "mark"] = "reject"
     mark_price_column: str = "mark_price"
     mark_low_column: str = "mark_low"

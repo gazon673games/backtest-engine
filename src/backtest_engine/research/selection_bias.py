@@ -10,9 +10,11 @@ from typing import Any
 
 import polars as pl
 
+from backtest_engine.core.exceptions import ReportingError
 from backtest_engine.research.performance import excess_kurtosis, sharpe_ratio, skewness
 from backtest_engine.research.performance import mean as mean
 from backtest_engine.research.performance import sample_std as sample_std
+from backtest_engine.research.return_inputs import validate_return_events
 
 RunEvents = tuple[dict[str, Any], pl.DataFrame]
 
@@ -67,8 +69,10 @@ def analyze_selection_bias(
 def aligned_return_matrix(runs: list[RunEvents]) -> tuple[list[str], list[list[float]]]:
     mappings: list[tuple[str, dict[Any, float]]] = []
     for summary, events in runs:
-        if "ts" not in events.columns or "net_return" not in events.columns:
-            continue
+        run_id = str(summary.get("run_id"))
+        validate_return_events(events, run_id)
+        if any(existing == run_id for existing, _ in mappings):
+            raise ReportingError(f"Duplicate research run_id: {run_id}")
         mapping = {
             row["ts"]: float(row["net_return"])
             for row in events.select("ts", "net_return").drop_nulls().iter_rows(named=True)
@@ -80,6 +84,11 @@ def aligned_return_matrix(runs: list[RunEvents]) -> tuple[list[str], list[list[f
     timestamps = set(mappings[0][1])
     for _run_id, mapping in mappings[1:]:
         timestamps.intersection_update(mapping)
+    if any(len(mapping) != len(timestamps) for _, mapping in mappings):
+        raise ReportingError(
+            "Selection-bias trials require identical observation timestamps; "
+            "select a common evaluation interval explicitly"
+        )
     ordered = sorted(timestamps)
     return (
         [run_id for run_id, _mapping in mappings],

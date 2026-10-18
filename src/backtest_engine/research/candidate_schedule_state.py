@@ -9,6 +9,7 @@ import numpy as np
 
 from backtest_engine.accounting.contract_support import validate_accounting_contract
 from backtest_engine.accounting.funding import funding_payment_for_row
+from backtest_engine.accounting.funding_policy import FundingMode
 from backtest_engine.accounting.futures import contract_point_value
 from backtest_engine.accounting.ledger import MultiCurrencyLedger
 from backtest_engine.accounting.perpetual import LinearPerpetualAccount
@@ -32,7 +33,7 @@ class MarketSchedulePrices:
     funding_unit: np.ndarray
 
 
-def prices_from_frame(frame, *, perpetual=False):
+def prices_from_frame(frame, *, perpetual=False, funding_mode: FundingMode = "legacy"):
     marks = frame["mark_price"].to_numpy() if perpetual else frame["close"].to_numpy()
     lows = frame["mark_low"].to_numpy() if perpetual else frame["low"].to_numpy()
     highs = frame["mark_high"].to_numpy() if perpetual else frame["high"].to_numpy()
@@ -60,6 +61,7 @@ def prices_from_frame(frame, *, perpetual=False):
                 default_rate=0,
                 event_column="funding_event",
                 require_event_flag=True,
+                mode=funding_mode,
             )
     return MarketSchedulePrices(
         frame["ts"].to_list(),

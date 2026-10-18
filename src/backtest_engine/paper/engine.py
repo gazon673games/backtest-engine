@@ -55,6 +55,7 @@ class PaperTradingEngine:
             liquidity_role=config.liquidity_role,
             require_mark_price=config.require_mark_price,
             require_margin_tiers=config.require_margin_tiers,
+            funding_mode=config.funding_mode,
         )
         self.history: list[dict[str, Any]] = []
         self.state_rows: list[dict[str, Any]] = []

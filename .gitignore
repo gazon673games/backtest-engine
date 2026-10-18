@@ -205,3 +205,8 @@ __pycache__/
 !/tests/fixtures/golden/ledger_statement.csv
 !/tests/fixtures/golden/spot_ledger_statement.csv
 /configs/examples/
+
+!/tests/test_l2_liquidity_conservation.py
+!/tests/test_funding_policy.py
+!/tests/test_research_evidence.py
+!/tests/test_quality_approval_values.py

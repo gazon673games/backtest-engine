@@ -153,6 +153,7 @@ class SharedCrossMarginRuntime:
                         default_rate=config.execution.default_funding_rate,
                         event_column=config.execution.funding_event_column,
                         require_event_flag=config.execution.require_funding_event_flag,
+                        mode=config.execution.funding_mode,
                     ),
                     "additional_cost": sum(
                         float(row[key])

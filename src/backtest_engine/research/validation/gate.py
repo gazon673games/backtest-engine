@@ -10,7 +10,11 @@ from typing import Any
 import polars as pl
 
 from backtest_engine.core.exceptions import ReportingError
+from backtest_engine.research.return_inputs import completed_by, validate_return_events
 from backtest_engine.research.selection_bias import analyze_selection_bias
+from backtest_engine.research.validation.acceptance import (
+    evaluate_research_gate as evaluate_research_gate,
+)
 from backtest_engine.research.validation.analytics import (
     block_bootstrap_metrics,
     bootstrap_metrics,
@@ -148,6 +152,8 @@ def build_research_frames(
     robustness = build_robustness(walk_forward, config.group_columns)
     guardrails, guardrail_warnings = build_guardrails(walk_forward, config)
     warnings.extend(guardrail_warnings)
+    if guardrails.height:
+        guardrails = guardrails.with_columns(pl.lit(summary.height).alias("requested_run_count"))
     rolling_walk_forward, locked_holdout, rolling_warnings = rolling_validation(run_events, config)
     warnings.extend(rolling_warnings)
     selection_bias = analyze_selection_bias(
@@ -184,6 +190,7 @@ def read_run_events(row: dict[str, Any], warnings: list[str]) -> pl.DataFrame | 
     if events.height == 0:
         warnings.append(f"empty events for run_id={row.get('run_id')}")
         return None
+    validate_return_events(events, str(row.get("run_id")))
     return events
 
 
@@ -192,7 +199,7 @@ def walk_forward_row(
     events: pl.DataFrame,
     split_date: Any,
 ) -> dict[str, Any]:
-    in_sample = events.filter(pl.col("ts").dt.date() < split_date)
+    in_sample = completed_by(events.filter(pl.col("ts").dt.date() < split_date), split_date)
     out_of_sample = events.filter(pl.col("ts").dt.date() >= split_date)
     return {
         **row,
@@ -235,58 +242,3 @@ def file_sha256(path: Path) -> str:
         for chunk in iter(lambda: source.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def evaluate_research_gate(
-    config: ResearchValidationConfig,
-    guardrails: pl.DataFrame,
-    warnings: list[str],
-    selection_bias: pl.DataFrame | None = None,
-) -> dict[str, Any]:
-    reasons = []
-    if len(warnings) > config.max_warning_count:
-        reasons.append(f"warning_count {len(warnings)} > {config.max_warning_count}")
-    if guardrails.height > 0:
-        row = guardrails.row(0, named=True)
-        if bool(row.get("multiple_testing_warning")):
-            reasons.append("multiple_testing_warning")
-        if bool(row.get("rank_instability_warning")):
-            reasons.append("rank_instability_warning")
-        if bool(row.get("oos_degradation_warning")):
-            reasons.append("oos_degradation_warning")
-        negative_share = row.get("negative_oos_run_share")
-        if negative_share is not None and negative_share > config.max_negative_oos_run_share:
-            reasons.append(
-                f"negative_oos_run_share {negative_share} > {config.max_negative_oos_run_share}"
-            )
-    if selection_bias is not None and selection_bias.height:
-        bias = selection_bias.row(0, named=True)
-        if int(bias.get("trial_count") or 0) > 1:
-            pbo = bias.get("probability_of_backtest_overfitting")
-            if pbo is not None and pbo > config.max_probability_of_backtest_overfitting:
-                reasons.append(
-                    "probability_of_backtest_overfitting "
-                    f"{pbo} > {config.max_probability_of_backtest_overfitting}"
-                )
-            reality_p = bias.get("reality_check_p_value")
-            if reality_p is not None and reality_p > config.max_reality_check_p_value:
-                reasons.append(
-                    f"reality_check_p_value {reality_p} > {config.max_reality_check_p_value}"
-                )
-            deflated = bias.get("best_deflated_sharpe_probability")
-            if deflated is not None and deflated < config.min_deflated_sharpe_probability:
-                reasons.append(
-                    "best_deflated_sharpe_probability "
-                    f"{deflated} < {config.min_deflated_sharpe_probability}"
-                )
-    return {
-        "gate_enabled": config.gate,
-        "acceptance_status": "rejected" if reasons else "accepted",
-        "reasons": reasons,
-        "warning_count": len(warnings),
-        "max_warning_count": config.max_warning_count,
-        "max_negative_oos_run_share": config.max_negative_oos_run_share,
-        "max_probability_of_backtest_overfitting": (config.max_probability_of_backtest_overfitting),
-        "max_reality_check_p_value": config.max_reality_check_p_value,
-        "min_deflated_sharpe_probability": config.min_deflated_sharpe_probability,
-    }

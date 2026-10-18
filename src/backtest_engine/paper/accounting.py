@@ -8,6 +8,7 @@ from typing import Any
 
 from backtest_engine.accounting.contract_support import validate_accounting_contract
 from backtest_engine.accounting.funding import funding_payment_for_row
+from backtest_engine.accounting.funding_policy import FundingMode
 from backtest_engine.accounting.ledger_runtime import BacktestLedgerRuntime
 from backtest_engine.accounting.perpetual import (
     LinearPerpetualAccount,
@@ -33,6 +34,7 @@ class PaperAccounting:
         liquidity_role: str,
         require_mark_price: bool = True,
         require_margin_tiers: bool = True,
+        funding_mode: FundingMode = "legacy",
     ) -> None:
         if instrument.instrument_type not in {"spot", "perpetual"}:
             raise DatasetValidationError("Paper accounting supports spot and perpetual instruments")
@@ -44,6 +46,7 @@ class PaperAccounting:
         self.liquidity_role = liquidity_role
         self.require_mark_price = require_mark_price
         self.require_margin_tiers = require_margin_tiers
+        self.funding_mode = funding_mode
         self.ledger = BacktestLedgerRuntime(
             initial_capital=initial_capital,
             base_currency=base_currency,
@@ -131,6 +134,7 @@ class PaperAccounting:
                 default_rate=0.0,
                 event_column="funding_event",
                 require_event_flag=True,
+                mode=self.funding_mode,
             ),
         )
         self._post_signed_cost(ts, currency, funding)

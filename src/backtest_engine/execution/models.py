@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 from datetime import datetime
+from math import isfinite
 from typing import Any
 
 from backtest_engine.core.exceptions import DatasetValidationError
@@ -92,6 +93,15 @@ def validate_order_request(request: OrderRequest) -> None:
         raise DatasetValidationError(f"Unsupported order type: {request.order_type}")
     if request.time_in_force not in TIME_IN_FORCE:
         raise DatasetValidationError(f"Unsupported time in force: {request.time_in_force}")
+    for label in ("quantity", "limit_price", "stop_price", "trailing_offset"):
+        value = getattr(request, label)
+        if value is not None:
+            try:
+                finite = not isinstance(value, bool) and isfinite(value)
+            except (TypeError, ValueError, OverflowError):
+                finite = False
+            if not finite:
+                raise DatasetValidationError(f"Order {label} must be finite")
     if request.quantity <= 0.0:
         raise DatasetValidationError("order quantity must be positive")
     if request.order_type in {"limit", "stop_limit"} and request.limit_price is None:

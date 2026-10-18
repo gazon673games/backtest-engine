@@ -5,8 +5,10 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
+from backtest_engine.accounting.funding_policy import FundingConfig
 
-class WorkbenchRunRequest(BaseModel):
+
+class WorkbenchRunRequest(FundingConfig):
     dataset_path: Path
     quality_approval_path: Path | None = None
     quality_approval_required: bool = True

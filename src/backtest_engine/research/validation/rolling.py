@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import math
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Any
 
 import polars as pl
 
+from backtest_engine.research.return_inputs import completed_by
 from backtest_engine.research.validation.config import ResearchValidationConfig
 from backtest_engine.research.validation.stats import segment_metrics
 
@@ -54,7 +55,7 @@ def rolling_fold_rows(
     config: ResearchValidationConfig,
 ) -> tuple[pl.DataFrame, list[str]]:
     warnings: list[str] = []
-    minimum = min(config.rolling_min_train_dates, max(2, len(dates) // 2))
+    minimum = config.rolling_min_train_dates
     remaining = len(dates) - minimum
     fold_count = min(config.rolling_folds, remaining)
     if fold_count < 1:
@@ -88,7 +89,9 @@ def evaluate_fold(
         return None
     train_start, train_end = dates[train_start_index], dates[train_end_index - 1]
     test_start, test_end = dates[test_start_index], dates[test_end_index - 1]
-    selected = select_candidate(runs, train_start, train_end, config.selection_metric)
+    selected = select_candidate(
+        runs, train_start, train_end, config.selection_metric, available_before=test_start
+    )
     if selected is None:
         return None
     summary, events, score = selected
@@ -106,7 +109,9 @@ def evaluate_fold(
         "test_end": test_end.isoformat(),
         "purge_dates": config.purge_dates,
         "embargo_dates": config.embargo_dates,
-        **segment_metrics("train", date_slice(events, train_start, train_end)),
+        **segment_metrics(
+            "train", completed_by(date_slice(events, train_start, train_end), test_start)
+        ),
         **segment_metrics("test", test),
     }
 
@@ -123,7 +128,9 @@ def locked_holdout_rows(
     if len(development) <= exclusion or not holdout:
         return pl.DataFrame()
     train_end = development[-1 - exclusion]
-    selected = select_candidate(runs, development[0], train_end, config.selection_metric)
+    selected = select_candidate(
+        runs, development[0], train_end, config.selection_metric, available_before=holdout[0]
+    )
     if selected is None:
         return pl.DataFrame()
     summary, events, score = selected
@@ -139,7 +146,9 @@ def locked_holdout_rows(
         "train_end": train_end.isoformat(),
         "holdout_start": holdout[0].isoformat(),
         "holdout_end": holdout[-1].isoformat(),
-        **segment_metrics("train", date_slice(events, development[0], train_end)),
+        **segment_metrics(
+            "train", completed_by(date_slice(events, development[0], train_end), holdout[0])
+        ),
         **segment_metrics("holdout", holdout_events),
     }
     return frame([row])
@@ -150,10 +159,14 @@ def select_candidate(
     start: date,
     end: date,
     metric: str,
+    *,
+    available_before: date | None = None,
 ) -> tuple[dict[str, Any], pl.DataFrame, float] | None:
     candidates = []
     for summary, events in runs:
-        sample = date_slice(events, start, end)
+        sample = completed_by(
+            date_slice(events, start, end), available_before or end + timedelta(days=1)
+        )
         score = selection_score(sample, metric)
         if score is not None:
             candidates.append((summary, events, score))

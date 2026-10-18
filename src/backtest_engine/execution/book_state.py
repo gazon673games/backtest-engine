@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from math import isfinite
 from typing import Any
 
 from backtest_engine.core.exceptions import DatasetValidationError
@@ -143,14 +144,20 @@ def _same_text(rows: list[dict[str, Any]], key: str) -> str:
 
 
 def _positive_float(value: Any, label: str) -> float:
-    parsed = float(value)
-    if parsed <= 0.0:
-        raise DatasetValidationError(f"{label} must be positive")
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError) as exc:
+        raise DatasetValidationError(f"{label} must be finite and positive") from exc
+    if not isfinite(parsed) or parsed <= 0.0:
+        raise DatasetValidationError(f"{label} must be finite and positive")
     return parsed
 
 
 def _non_negative_float(value: Any, label: str) -> float:
-    parsed = float(value)
-    if parsed < 0.0:
-        raise DatasetValidationError(f"{label} must be non-negative")
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError) as exc:
+        raise DatasetValidationError(f"{label} must be finite and non-negative") from exc
+    if not isfinite(parsed) or parsed < 0.0:
+        raise DatasetValidationError(f"{label} must be finite and non-negative")
     return parsed

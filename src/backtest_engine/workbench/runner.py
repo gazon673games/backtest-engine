@@ -185,6 +185,11 @@ def build_backtest_config(
             roll_pnl_policy=request.roll_pnl_policy,
             trading_days_per_year=defaults["trading_days_per_year"],
             liquidity_role=request.liquidity_role,
+            funding_mode=request.funding_mode,
+            funding_rate_column=request.funding_rate_column,
+            default_funding_rate=request.default_funding_rate,
+            funding_event_column=request.funding_event_column,
+            require_funding_event_flag=request.require_funding_event_flag,
         ),
         output=IntradayEventOutputConfig(
             root=request.output_root,

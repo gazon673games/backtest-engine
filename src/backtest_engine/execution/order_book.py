@@ -113,18 +113,32 @@ class OrderBookReplaySimulator:
         return state
 
     def _fill_resting_orders(self, removed: dict[tuple[str, float], float], ts: datetime) -> None:
-        for order_id in list(self.open_order_ids):
+        filled_by_level: dict[tuple[str, float], float] = {}
+        blocked_levels: set[tuple[str, float]] = set()
+        # queue_ahead retains submission order; set iteration cannot define FIFO.
+        for order_id in tuple(self.queue_ahead):
+            if order_id not in self.open_order_ids:
+                continue
             state = self.orders[order_id]
+            if state.request.reduce_only and not reduces_position(
+                state.request, self.position_quantity
+            ):
+                self.cancel(order_id)
+                continue
             side = "bid" if state.request.side == "buy" else "ask"
             price = float(state.request.limit_price)
-            consumed = removed.get((side, price), 0.0)
+            level = (side, price)
+            consumed = max(removed.get(level, 0.0) - filled_by_level.get(level, 0.0), 0.0)
             ahead = self.queue_ahead.get(order_id, 0.0)
             self.queue_ahead[order_id] = max(ahead - consumed, 0.0)
             available = max(consumed - ahead, 0.0)
             quantity = min(state.remaining_quantity, available)
             quantity = self._reducible_quantity(state.request, quantity)
-            if quantity > 0.0:
-                self._record_fill(state, quantity, price, ts, "maker")
+            if quantity > 0.0 and level not in blocked_levels:
+                filled_by_level[level] = filled_by_level.get(level, 0.0) + quantity
+                state = self._record_fill(state, quantity, price, ts, "maker")
+            if state.is_open:
+                blocked_levels.add(level)
 
     def _record_fill(
         self, state: OrderState, quantity: float, price: float, ts: datetime, role: str
@@ -164,6 +178,8 @@ class OrderBookReplaySimulator:
         return batch
 
     def _reducible_quantity(self, request: OrderRequest, quantity: float) -> float:
+        if request.reduce_only and not reduces_position(request, self.position_quantity):
+            return 0.0
         return min(quantity, abs(self.position_quantity)) if request.reduce_only else quantity
 
     def _reject(self, request: OrderRequest, reason: str) -> OrderState:
@@ -190,6 +206,7 @@ class OrderBookReplaySimulator:
         for order_id in order_ids:
             self.orders[order_id] = replace(self.orders[order_id], status="cancelled")
             self.open_order_ids.discard(order_id)
+            self.queue_ahead.pop(order_id, None)
 
 
 def _timestamp(value: Any) -> datetime:

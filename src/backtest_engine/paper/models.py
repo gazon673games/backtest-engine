@@ -5,6 +5,7 @@ from typing import Any
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
+from backtest_engine.accounting.funding_policy import FundingMode
 from backtest_engine.data.instrument_registry import InstrumentSpec
 from backtest_engine.data.market_identity import account_currency
 from backtest_engine.execution.models import EXECUTION_DATA_MODES
@@ -32,6 +33,7 @@ class PaperTradingConfig(BaseModel):
     strict_runtime: bool = True
     require_mark_price: bool = True
     require_margin_tiers: bool = True
+    funding_mode: FundingMode = "legacy"
 
     @model_validator(mode="after")
     def resolve_currency(self) -> PaperTradingConfig:

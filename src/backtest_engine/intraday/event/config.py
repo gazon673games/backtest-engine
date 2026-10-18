@@ -6,6 +6,7 @@ from typing import Any, Literal, Self
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
+from backtest_engine.accounting.funding_policy import FundingConfig
 from backtest_engine.core.validation import validate_choice as _validate_choice
 from backtest_engine.data.instrument_registry import InstrumentSpec, MarginTierSpec
 from backtest_engine.data.session_model import SESSION_FILTERS, SHORT_DAY_POLICIES
@@ -179,7 +180,7 @@ class IntradayEventSessionConfig(BaseModel):
         return _validate_choice(value, INTRADAY_EVENT_SHORT_DAY_POLICIES, "short day policy")
 
 
-class IntradayEventExecutionConfig(BaseModel):
+class IntradayEventExecutionConfig(FundingConfig):
     engine: str = "v3"
     timing: str = "signal_close_to_next_bar_close"
     allow_noncausal_same_close: bool = False
@@ -208,10 +209,6 @@ class IntradayEventExecutionConfig(BaseModel):
     roll_pnl_policy: Literal["reject", "exclude_gap"] = "reject"
     trading_days_per_year: int | None = Field(default=None, gt=0)
     liquidity_role: str = "taker"
-    funding_rate_column: str = "funding_rate"
-    default_funding_rate: float = 0.0
-    funding_event_column: str = "funding_event"
-    require_funding_event_flag: bool = True
     end_of_data_position_policy: Literal["reject", "mark"] = "reject"
     data_mode: str = "bar"
     mark_price_column: str = "mark_price"
