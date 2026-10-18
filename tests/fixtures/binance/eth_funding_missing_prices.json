@@ -1,0 +1,204 @@
+{
+  "source": "https://fapi.binance.com",
+  "captured_at": "2026-10-10T14:38:35.863005+00:00",
+  "records": [
+    {
+      "request": {
+        "product": "perpetual",
+        "path": "/fapi/v1/markPriceKlines",
+        "params": {
+          "symbol": "ETHUSDT",
+          "interval": "1m",
+          "startTime": 1698796800000,
+          "endTime": 1698796859999,
+          "limit": 1
+        }
+      },
+      "response": [
+        [
+          1698796800000,
+          "1815.68000000",
+          "1816.28170392",
+          "1815.66000000",
+          "1816.27916275",
+          "0",
+          1698796859999,
+          "0",
+          60,
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "raw_sha256": "0f2773017dc1c4dfcc67c943fd5051d53d3ce3c5aa5666bb56bae730ba8552fc"
+    },
+    {
+      "request": {
+        "product": "perpetual",
+        "path": "/fapi/v1/fundingRate",
+        "params": {
+          "symbol": "ETHUSDT",
+          "startTime": 1609459200000,
+          "endTime": 1609545599999,
+          "limit": 3
+        }
+      },
+      "response": [
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1609459200002,
+          "fundingRate": "0.00034491",
+          "markPrice": "",
+          "rateType": "Regular"
+        },
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1609488000006,
+          "fundingRate": "0.00061141",
+          "markPrice": "",
+          "rateType": "Regular"
+        },
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1609516800003,
+          "fundingRate": "0.00056803",
+          "markPrice": "",
+          "rateType": "Regular"
+        }
+      ],
+      "raw_sha256": "1542e900ec546f4ae0415cb17bf02e03fa30e844370bc9ac1025fe4f84acd854"
+    },
+    {
+      "request": {
+        "product": "perpetual",
+        "path": "/fapi/v1/fundingRate",
+        "params": {
+          "symbol": "ETHUSDT",
+          "startTime": 1698796800000,
+          "endTime": 1698883199999,
+          "limit": 3
+        }
+      },
+      "response": [
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1698796800000,
+          "fundingRate": "0.00010000",
+          "markPrice": "1815.68000000",
+          "rateType": "Regular"
+        },
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1698825600000,
+          "fundingRate": "0.00010000",
+          "markPrice": "1805.10087255",
+          "rateType": "Regular"
+        },
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1698854400000,
+          "fundingRate": "0.00010000",
+          "markPrice": "1792.96543725",
+          "rateType": "Regular"
+        }
+      ],
+      "raw_sha256": "3b90e316d3e21c62c84f9e0a5c984381c867746ff0b7d1630ce8f82bd5cc79cd"
+    },
+    {
+      "request": {
+        "product": "perpetual",
+        "path": "/fapi/v1/markPriceKlines",
+        "params": {
+          "symbol": "ETHUSDT",
+          "interval": "1m",
+          "startTime": 1609459200000,
+          "endTime": 1609459259999,
+          "limit": 1
+        }
+      },
+      "response": [
+        [
+          1609459200000,
+          "736.96351520",
+          "737.42716502",
+          "736.53000000",
+          "737.38703534",
+          "0",
+          1609459259999,
+          "0",
+          60,
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "raw_sha256": "450b2472451b41ccc738eac3a1393c020e002fe1791d35c58451a171ed375cfd"
+    },
+    {
+      "request": {
+        "product": "perpetual",
+        "path": "/fapi/v1/fundingRate",
+        "params": {
+          "symbol": "ETHUSDT",
+          "startTime": 1577145600000,
+          "endTime": 1577231999999,
+          "limit": 3
+        }
+      },
+      "response": [
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1577145600000,
+          "fundingRate": "0.00010000",
+          "markPrice": "",
+          "rateType": "Regular"
+        },
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1577174400000,
+          "fundingRate": "0.00010000",
+          "markPrice": "",
+          "rateType": "Regular"
+        },
+        {
+          "symbol": "ETHUSDT",
+          "fundingTime": 1577203200000,
+          "fundingRate": "0.00010000",
+          "markPrice": "",
+          "rateType": "Regular"
+        }
+      ],
+      "raw_sha256": "b0ffe8f001b555827b40473d68e02f415baa84dcf2a0b6110594408315c3e7e1"
+    },
+    {
+      "request": {
+        "product": "perpetual",
+        "path": "/fapi/v1/markPriceKlines",
+        "params": {
+          "symbol": "ETHUSDT",
+          "interval": "1m",
+          "startTime": 1577145600000,
+          "endTime": 1577145659999,
+          "limit": 1
+        }
+      },
+      "response": [
+        [
+          1577145600000,
+          "127.87953791",
+          "128.00300986",
+          "127.87953791",
+          "127.99690856",
+          "0",
+          1577145659999,
+          "0",
+          60,
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "raw_sha256": "fe7f961a800324dddc936885bd07d4ae66ddb7f324a495674684007712d3ed0c"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+"""Public compatibility facade for split implementation modules."""
+
+from backtest_engine.workbench._report_builder import EQUITY_REPORT_COLUMNS as EQUITY_REPORT_COLUMNS
+from backtest_engine.workbench._report_builder import EVENT_REPORT_COLUMNS as EVENT_REPORT_COLUMNS
+from backtest_engine.workbench._report_builder import REPORT_TABLES as REPORT_TABLES
+from backtest_engine.workbench._report_builder import (
+    build_workbench_report as build_workbench_report,
+)
+from backtest_engine.workbench._report_builder import candle_frame as candle_frame
+from backtest_engine.workbench._report_builder import equity_frame as equity_frame
+from backtest_engine.workbench._report_builder import pnl_frame as pnl_frame
+from backtest_engine.workbench._report_builder import position_frame as position_frame
+from backtest_engine.workbench._report_builder import read_candle_table as read_candle_table
+from backtest_engine.workbench._report_builder import read_dataset_quality as read_dataset_quality
+from backtest_engine.workbench._report_builder import read_json as read_json
+from backtest_engine.workbench._report_builder import read_table as read_table
+from backtest_engine.workbench._report_frames import cost_frame as cost_frame
+from backtest_engine.workbench._report_frames import downsample as downsample
+from backtest_engine.workbench._report_frames import downsample_records as downsample_records
+from backtest_engine.workbench._report_frames import extract_plot_series as extract_plot_series
+from backtest_engine.workbench._report_frames import extrema_downsample as extrema_downsample
+from backtest_engine.workbench._report_frames import frame_records as frame_records
+from backtest_engine.workbench._report_frames import select_rows as select_rows
+from backtest_engine.workbench._report_frames import selected_frame as selected_frame
+from backtest_engine.workbench._report_frames import table_records as table_records
+from backtest_engine.workbench._report_frames import transition_frame as transition_frame
+from backtest_engine.workbench._report_values import json_value as json_value
+from backtest_engine.workbench._report_values import parse_features as parse_features

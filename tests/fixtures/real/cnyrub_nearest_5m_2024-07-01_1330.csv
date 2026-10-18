@@ -1,0 +1,9 @@
+source,exchange,engine,market,board,symbol,continuous_symbol,timeframe,ts,open,high,low,close,volume,value,currency,active_contract,source_contract_symbol,dataset_type,adjustment_mode
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T13:30:00.000000,11.989,11.995,11.987,11.994,14950.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T13:35:00.000000,11.993,11.998,11.99,11.995,11844.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T13:40:00.000000,11.995,11.996,11.985,11.995,21524.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T13:45:00.000000,11.995,11.997,11.977,11.984,19894.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T13:50:00.000000,11.984,11.997,11.984,11.995,18217.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T13:55:00.000000,11.996,11.998,11.981,11.99,19375.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T14:05:00.000000,11.99,11.996,11.98,11.994,22816.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted
+continuous_futures_builder,MOEX,futures,forts,RFUD,CNYRUB_NEAREST_5M,CNYRUB_NEAREST_5M,5m,2024-07-01T14:10:00.000000,11.993,11.993,11.977,11.982,19637.0,0.0,,CRU4,CRU4,nearest_contract,unadjusted

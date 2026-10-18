@@ -1,0 +1,27 @@
+{
+  "status": "margin_call",
+  "error": "Margin call after settlement for CRM4: required_margin=129142.0, equity_cash=128821.21410000103",
+  "dataset_sha256": "2bc3b28d77ec0addf30e84693fe6180a5d241e5b8d137273389a133812aab70f",
+  "stop": {
+    "ts": "2024-05-27 11:00:00",
+    "fill_ts": "2024-05-27 11:05:00",
+    "row_index": 17405,
+    "contracts": 100.0,
+    "equity_cash": 128821.21410000103
+  },
+  "dataset_rows": 42545,
+  "inputs": {
+    "instrument_registry_path": "559fb3263b3cc8d7ea69ce91f7bc846c98035399f363a661bc26e80ec4a35723",
+    "calendar_path": "dfacf08bb4500e14abd7ecd52c46b2a53fa287fbb18d7184db33e7a94f00563d",
+    "quality_approval_path": "49bab8e9c77274fa8c5f1aef059994c2feffc26d0c64f54e539c085569cbee17"
+  },
+  "assumptions": {
+    "initial_capital": 200000,
+    "contracts_per_day": 1,
+    "decision_time": "11:00",
+    "execution_timing": "signal_close_to_next_bar_close",
+    "commission_bps": 1.0,
+    "roll_pnl_policy": "exclude_gap",
+    "instrument_specs": "saved MOEX registry snapshot; not a historical daily margin series"
+  }
+}

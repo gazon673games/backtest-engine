@@ -1,0 +1,51 @@
+{
+  "calendar": {
+    "item_count": 1055,
+    "output_path": "..\\backtest_engine\\configs\\generated\\observed_session_calendar.json",
+    "source_path": "..\\continuous_futures_builder\\data\\derived\\nearest_contract_futures\\exchange=MOEX\\engine=futures\\market=forts\\continuous_symbol=CNYRUB_NEAREST_5M\\timeframe=5m\\adjustment_mode=unadjusted\\part-000.parquet",
+    "source_sha256": "9a5e9e7e9ea9d930916a1517c2b45d9a4e13c2acf0f854abf0ae5da8be52b52e",
+    "warnings": []
+  },
+  "calendar_audit": {
+    "audit_status": "approved",
+    "issue_count": 0,
+    "issues": [],
+    "item_count": 1055,
+    "output_path": "..\\backtest_engine\\configs\\generated\\observed_session_calendar_audit.json",
+    "warning_count": 0,
+    "warnings": []
+  },
+  "catalog": {
+    "item_count": 7,
+    "output_path": "..\\backtest_engine\\configs\\generated\\data_catalog.json",
+    "source_path": null,
+    "source_sha256": null,
+    "warnings": []
+  },
+  "derived_root": "..\\continuous_futures_builder\\data\\derived",
+  "generated_at": "2026-07-09T07:11:23Z",
+  "manifest_version": 1,
+  "metadata_snapshot_path": "..\\moex_iss_adapter\\data\\normalized\\metadata\\exchange=MOEX\\engine=futures\\market=forts\\securities\\snapshot_ts=20260705T191404Z",
+  "observed_dataset_path": "..\\continuous_futures_builder\\data\\derived\\nearest_contract_futures\\exchange=MOEX\\engine=futures\\market=forts\\continuous_symbol=CNYRUB_NEAREST_5M\\timeframe=5m\\adjustment_mode=unadjusted\\part-000.parquet",
+  "registry": {
+    "item_count": 12,
+    "output_path": "..\\backtest_engine\\configs\\generated\\moex_forts_instrument_specs.json",
+    "source_path": "..\\moex_iss_adapter\\data\\normalized\\metadata\\exchange=MOEX\\engine=futures\\market=forts\\securities\\snapshot_ts=20260705T191404Z",
+    "source_sha256": "2b7b839b7a6b10cfcf665ebbf97e76a173571c7b70d42afe852065ba655cef3b",
+    "warnings": []
+  },
+  "registry_audit": {
+    "audit_status": "approved",
+    "issue_count": 0,
+    "issues": [],
+    "item_count": 12,
+    "output_path": "..\\backtest_engine\\configs\\generated\\moex_forts_instrument_specs_audit.json",
+    "warning_count": 0,
+    "warnings": []
+  },
+  "reports_root": "..\\continuous_futures_builder\\data\\reports",
+  "symbol_prefixes": [
+    "CR",
+    "Si"
+  ]
+}

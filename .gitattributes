@@ -1,0 +1,7 @@
+# Recorded golden controls have SHA-256 provenance; preserve exact checkout bytes.
+tests/fixtures/golden/*.csv -text
+
+# Preserve SHA-256-bound ETH metadata without checkout newline conversion.
+tests/fixtures/binance/eth_chronological/instrument_registry.json -text whitespace=cr-at-eol
+tests/fixtures/binance/eth_chronological/session_calendar.json -text whitespace=cr-at-eol
+.githooks/* text eol=lf

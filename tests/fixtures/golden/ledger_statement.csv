@@ -1,0 +1,3 @@
+ts,symbol,currency,net_cash_flow,cash_balance,equity_cash
+2024-01-01T00:01:00,TEST,USD,10.0,1010.0,1010.0
+2024-01-01T00:02:00,TEST,USD,-5.0,1005.0,1005.0

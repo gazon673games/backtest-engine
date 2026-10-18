@@ -1,0 +1,13 @@
+{
+  "source": "recorded Binance ETHUSDT perpetual klines, marks and funding",
+  "source_study": "data/broad-exploration-20261009/history",
+  "source_dataset_sha256": "f4f09d5c17e7489a6deba9750b6791cb71daa7593a912b0d46ed054d94f3cadf",
+  "policy": "first 960 unchanged rows of the longest audited continuous hourly block",
+  "first": "2019-12-23 11:00:00+00:00",
+  "last": "2020-02-01 10:59:59.999000+00:00",
+  "rows": 960,
+  "sha256": "6d4f6dfbd63d08643a7d58bd059c52e531d0de3beae44dbe430fb36bb00ea497",
+  "historical_rules": "unknown; current filters; assumed fees/margin, not approved",
+  "fixture_registry_sha256": "a0a9b152f2466c2a1ea2ccc094de3c19446c44ed8b5643e1e69ed74f8984bb60",
+  "fixture_calendar_sha256": "6a5d50df047f90def340e65d8d32dbe5f9edcabcbb39fb043df102c5b25499d4"
+}

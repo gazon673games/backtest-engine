@@ -1,0 +1,93 @@
+name: quality
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: backtest_engine
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: backtest_engine
+      - uses: actions/checkout@v6
+        with:
+          repository: gazon673games/ohlcv-data-store
+          ref: 745a97827c25e9939374221ce0c888b1590925dc
+          path: data_store
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: gazon673games/continuous-futures-builder
+          ref: 5c36c37927dfde706aa29ab6a4763f0c693c528f
+          path: continuous_futures_builder
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: gazon673games/moex-iss-adapter
+          ref: 0258826657b2a5ca0ff92362cba19f93bff06fbf
+          path: moex_iss_adapter
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+          python-version: "3.12"
+          cache-dependency-glob: backtest_engine/uv.lock
+      - run: uv sync --locked
+      - run: uv run python scripts/check_publication.py
+      - run: uv run python scripts/check_distribution.py vendor/strategy_sdk-0.5.2-py3-none-any.whl
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: node --version
+      - run: uv run python -m pytest -q --maxfail=1 --tb=short -o faulthandler_timeout=90
+
+  event-loop-performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RUN_PERFORMANCE_TESTS: "1"
+      MIN_EVENT_ROWS_PER_SECOND: "500"
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: backtest_engine
+      - uses: actions/checkout@v6
+        with:
+          repository: gazon673games/ohlcv-data-store
+          ref: 745a97827c25e9939374221ce0c888b1590925dc
+          path: data_store
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: gazon673games/continuous-futures-builder
+          ref: 5c36c37927dfde706aa29ab6a4763f0c693c528f
+          path: continuous_futures_builder
+          persist-credentials: false
+      - uses: actions/checkout@v6
+        with:
+          repository: gazon673games/moex-iss-adapter
+          ref: 0258826657b2a5ca0ff92362cba19f93bff06fbf
+          path: moex_iss_adapter
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+          python-version: "3.12"
+          cache-dependency-glob: backtest_engine/uv.lock
+      - run: uv sync --locked
+      - run: node --version
+      - run: uv run python -m pytest -q -s tests/test_event_loop_performance.py

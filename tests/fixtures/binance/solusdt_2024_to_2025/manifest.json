@@ -1,0 +1,260 @@
+{
+  "symbol": "SOLUSDT",
+  "interval": "4h",
+  "start_ms": 1704067200000,
+  "end_ms": 1735775999999,
+  "responses": [
+    {
+      "series": "spot_klines",
+      "file": "spot_klines_01.json.gz",
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&startTime=1704067200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1704067200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:54.571725+00:00",
+      "sha256": "9ef5bd2661790a4740b7d96d9445f94b8fa95e2ceb95c87f63542103c5711999",
+      "compressed_sha256": "8c5b23867371d12b022681599286fa69b204d7f94ec725f6e94b3e37d7fe7cda",
+      "count": 1000,
+      "first_timestamp_ms": 1704067200000,
+      "last_timestamp_ms": 1718452800000
+    },
+    {
+      "series": "spot_klines",
+      "file": "spot_klines_02.json.gz",
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&startTime=1718467200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1718467200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:56.768049+00:00",
+      "sha256": "42c809e111ef898e1d4396361296ca743129fd7ab301de336aeac3020801a81f",
+      "compressed_sha256": "2bc792aad856de91698b7963ae2de23daf696343c2a92a0c1c9491207dff5430",
+      "count": 1000,
+      "first_timestamp_ms": 1718467200000,
+      "last_timestamp_ms": 1732852800000
+    },
+    {
+      "series": "spot_klines",
+      "file": "spot_klines_03.json.gz",
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&startTime=1732867200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1732867200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:58.471182+00:00",
+      "sha256": "eded362eec35f91362c958aa4ec0ece25c755ac2ca28bedf8a1b15da66d29dbe",
+      "compressed_sha256": "8a40299b349f519129e1f96a4897d66a36c2d7e75653e75cf63e3b3f94ad6b35",
+      "count": 202,
+      "first_timestamp_ms": 1732867200000,
+      "last_timestamp_ms": 1735761600000
+    },
+    {
+      "series": "perpetual_klines",
+      "file": "perpetual_klines_01.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/klines?symbol=SOLUSDT&startTime=1704067200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1704067200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:52.847099+00:00",
+      "sha256": "5098ca1d5eaac2fa74fa730addbadc129a0a9bd4e988693c804c7dbe7580fb8a",
+      "compressed_sha256": "64203a60bf816da47ff005afd1dfeec924c3fb7f1aad71dedaaf8024d5fb58c1",
+      "count": 1000,
+      "first_timestamp_ms": 1704067200000,
+      "last_timestamp_ms": 1718452800000
+    },
+    {
+      "series": "perpetual_klines",
+      "file": "perpetual_klines_02.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/klines?symbol=SOLUSDT&startTime=1718467200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1718467200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:54.208621+00:00",
+      "sha256": "ec8203dbd40a8fae302bbc6b5063d7e97a6a0d13d6dabc6e632b4801ed7742cb",
+      "compressed_sha256": "6cb31ddae804f730b8e5308778fb76dccda09d3cd22a9c6b3d3a1ee35de6cdf9",
+      "count": 1000,
+      "first_timestamp_ms": 1718467200000,
+      "last_timestamp_ms": 1732852800000
+    },
+    {
+      "series": "perpetual_klines",
+      "file": "perpetual_klines_03.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/klines?symbol=SOLUSDT&startTime=1732867200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1732867200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:55.102598+00:00",
+      "sha256": "ac017e709e99d9d09caf8e10217d9ea2602e478a3e80941f4969df4c5f7d955e",
+      "compressed_sha256": "09e545d7ac73b4a579b3bda050b07874d7d84ae5b2cf17065f88305c3f45d678",
+      "count": 202,
+      "first_timestamp_ms": 1732867200000,
+      "last_timestamp_ms": 1735761600000
+    },
+    {
+      "series": "perpetual_marks",
+      "file": "perpetual_marks_01.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/markPriceKlines?symbol=SOLUSDT&startTime=1704067200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1704067200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:52.526052+00:00",
+      "sha256": "288c31bf563de9b41a7b124486cf8f635eae5c204e0468dc243e06b2539fd3d2",
+      "compressed_sha256": "9e5fdcc521ae1ec015ceb4e2442a7fece804bb64b140ed1a383694d2b3b49643",
+      "count": 1000,
+      "first_timestamp_ms": 1704067200000,
+      "last_timestamp_ms": 1718452800000
+    },
+    {
+      "series": "perpetual_marks",
+      "file": "perpetual_marks_02.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/markPriceKlines?symbol=SOLUSDT&startTime=1718467200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1718467200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:53.534444+00:00",
+      "sha256": "14dd1c82a69e27bbb11bef9def956232086f8b593637d8f9689efd510dfaf88d",
+      "compressed_sha256": "ca10ffd93c10565e0dc0143f88702d0348b38d9f291a4b2fff01fdc5e5bdf9dc",
+      "count": 1000,
+      "first_timestamp_ms": 1718467200000,
+      "last_timestamp_ms": 1732852800000
+    },
+    {
+      "series": "perpetual_marks",
+      "file": "perpetual_marks_03.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/markPriceKlines?symbol=SOLUSDT&startTime=1732867200000&endTime=1735775999999&limit=1000&interval=4h",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1732867200000,
+        "endTime": 1735775999999,
+        "limit": 1000,
+        "interval": "4h"
+      },
+      "captured_at": "2026-10-08T15:11:54.132533+00:00",
+      "sha256": "8baaad4aa6370cf0cf9545ded7463b03862b511e9b7bc6964544613125f2fa04",
+      "compressed_sha256": "ba4330885315feb69b0c8b469cd17b8a69507fbc0c751cf5bdb88ce89d2b64a6",
+      "count": 202,
+      "first_timestamp_ms": 1732867200000,
+      "last_timestamp_ms": 1735761600000
+    },
+    {
+      "series": "perpetual_funding",
+      "file": "perpetual_funding_01.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/fundingRate?symbol=SOLUSDT&startTime=1704067200000&endTime=1735775999999&limit=1000",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1704067200000,
+        "endTime": 1735775999999,
+        "limit": 1000
+      },
+      "captured_at": "2026-10-08T15:11:52.536421+00:00",
+      "sha256": "4f5f55b50abd7e2d7cba0150e59673d52a829234b80caced82b1a474bcdfd6a6",
+      "compressed_sha256": "0908782e5e4443a47738032fe45052f6c397866345110d9048c29c9e6c82a051",
+      "count": 1000,
+      "first_timestamp_ms": 1704067200000,
+      "last_timestamp_ms": 1732838400000
+    },
+    {
+      "series": "perpetual_funding",
+      "file": "perpetual_funding_02.json.gz",
+      "url": "https://fapi.binance.com/fapi/v1/fundingRate?symbol=SOLUSDT&startTime=1732838400001&endTime=1735775999999&limit=1000",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1732838400001,
+        "endTime": 1735775999999,
+        "limit": 1000
+      },
+      "captured_at": "2026-10-08T15:11:53.106378+00:00",
+      "sha256": "fb4dbc0f00e9c13897fd06108caebf81dc062a765d98ecbe912709f09dc18ad5",
+      "compressed_sha256": "93018ac5cfc174e797c5ec4164a3ddbbbbbcdbdf66dd44775c3c2e7c03409c28",
+      "count": 101,
+      "first_timestamp_ms": 1732867200000,
+      "last_timestamp_ms": 1735747200001
+    }
+  ],
+  "row_counts": {
+    "spot_klines": 2202,
+    "perpetual_klines": 2202,
+    "perpetual_marks": 2202,
+    "perpetual_funding": 1101
+  },
+  "policy": {
+    "initial_capital_usdt": "1000",
+    "quantity_sol": "5",
+    "entry_utc": "2024-01-01T04:00:00+00:00",
+    "exit_utc": "2025-01-01T04:00:00+00:00",
+    "taker_fee_bps": "10",
+    "quantity_step": "0.001",
+    "minimum_notional_usdt": "5",
+    "perpetual_leverage": "5",
+    "historical_fees_verified": false,
+    "historical_filters_verified": false,
+    "historical_margin_verified": false
+  },
+  "oracle_method": "Independent Decimal cash/holdings identity; no engine imports or outputs",
+  "expected": {
+    "spot": {
+      "entry_price": "103.07000000",
+      "exit_price": "190.42000000",
+      "quantity_sol": "5",
+      "buy_notional_usdt": "515.35000000",
+      "sell_notional_usdt": "952.10000000",
+      "gross_profit_usdt": "436.75000000",
+      "fees_usdt": "1.46745000000",
+      "funding_usdt": "0",
+      "charged_funding_count": 0,
+      "final_usdt": "1435.28255000000",
+      "total_return": "0.43528255000",
+      "ledger_rows": 2201,
+      "golden_file": "sol_year_return_spot.csv.gz",
+      "golden_sha256": "24abbbd7b5c24f31c113316a4a3bb77b3f4cec2ce34bfdd90ff51afd651979fb",
+      "compressed_sha256": "955904579e8b9b572a7e1d9a48b8d44f2fb9e856bf9e3af01e0edf5d4e284023"
+    },
+    "perpetual": {
+      "entry_price": "103.1730",
+      "exit_price": "190.3100",
+      "quantity_sol": "5",
+      "buy_notional_usdt": "515.8650",
+      "sell_notional_usdt": "951.5500",
+      "gross_profit_usdt": "435.6850",
+      "fees_usdt": "1.4674150",
+      "funding_usdt": "108.0865830647130580",
+      "charged_funding_count": 1098,
+      "final_usdt": "1326.1310019352869420",
+      "total_return": "0.326131001935286942",
+      "ledger_rows": 2201,
+      "golden_file": "sol_year_return_perpetual.csv.gz",
+      "golden_sha256": "2cba0d424ddd0f2ce05f74c8e4a64badb2d8a88e9819ec0774d3316e88660062",
+      "compressed_sha256": "a7bcb092627a0f7ec31564bb6b7719ad3f6c2a6ab1231e356c96475c7cf40dd9"
+    }
+  }
+}

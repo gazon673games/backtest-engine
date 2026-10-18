@@ -1,0 +1,14 @@
+{
+  "audit_status": "approved",
+  "audit_type": "session_calendar",
+  "audit_version": 1,
+  "calendar_path": "..\\backtest_engine\\configs\\generated\\observed_session_calendar.json",
+  "calendar_sha256": "7e854a539e80e9371e98fc50821d294af6eb002b8b73110b9cdd8dc7d0e8dad3",
+  "generated_at": "2026-07-09T07:11:22Z",
+  "issue_count": 0,
+  "issues": [],
+  "item_count": 1055,
+  "output_path": "..\\backtest_engine\\configs\\generated\\observed_session_calendar_audit.json",
+  "warning_count": 0,
+  "warnings": []
+}

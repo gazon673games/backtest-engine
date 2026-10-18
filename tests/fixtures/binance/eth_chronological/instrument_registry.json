@@ -1,0 +1,34 @@
+{
+  "instruments": [
+    {
+      "symbol": "ETHUSDT",
+      "venue": null,
+      "rule_source": "unverified_current_filters_diagnostic",
+      "source_as_of": null,
+      "asset_class": "crypto",
+      "instrument_type": "perpetual",
+      "valid_from": null,
+      "valid_to": null,
+      "price_currency": "USDT",
+      "pnl_currency": "USDT",
+      "contract_multiplier": 1.0,
+      "lot_size": 1.0,
+      "tick_size": 0.01,
+      "tick_value": null,
+      "initial_margin": null,
+      "exchange_fee_per_contract": 0.0,
+      "base_currency": "ETH",
+      "quote_currency": "USDT",
+      "settlement_currency": "USDT",
+      "contract_type": "linear",
+      "quantity_step": 0.001,
+      "minimum_quantity": 0.001,
+      "minimum_notional": 20.0,
+      "maker_fee_bps": 0.0,
+      "taker_fee_bps": 5.0,
+      "maintenance_margin_rate": 0.005,
+      "liquidation_fee_bps": 50.0,
+      "margin_tiers": []
+    }
+  ]
+}

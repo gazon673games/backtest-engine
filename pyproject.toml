@@ -1,0 +1,61 @@
+[project]
+name = "backtest-engine"
+version = "0.1.0"
+description = "Exchange-neutral backtester with explicit data, execution and ledger inputs."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ohlcv-data-store==0.1.0",
+    "strategy-sdk==0.5.2",
+    "matplotlib>=3.9.0",
+    "polars>=1.0.0",
+    "pyarrow>=15.0.0",
+    "pydantic>=2.7.0",
+    "truststore>=0.9.0",
+    "typer>=0.12.0",
+    "tzdata>=2025.2",
+    "mcp>=1.26,<2",
+]
+
+[project.optional-dependencies]
+moex = ["continuous-futures-builder==0.1.0", "moex-iss-adapter==0.1.0"]
+
+[tool.uv]
+default-groups = ["dev", "market-adapters"]
+
+[project.scripts]
+backtest = "backtest_engine.cli:app"
+backtest-mcp = "backtest_engine.workbench.mcp_server:main"
+
+[tool.uv.sources]
+ohlcv-data-store = { path = "../data_store", editable = true }
+continuous-futures-builder = { path = "../continuous_futures_builder", editable = true }
+moex-iss-adapter = { path = "../moex_iss_adapter", editable = true }
+strategy-sdk = { path = "vendor/strategy_sdk-0.5.2-py3-none-any.whl" }
+
+[dependency-groups]
+market-adapters = ["continuous-futures-builder==0.1.0", "moex-iss-adapter==0.1.0"]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/backtest_engine"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "performance: opt-in large-scale performance regression tests",
+]

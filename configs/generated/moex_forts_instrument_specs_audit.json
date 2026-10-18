@@ -1,0 +1,14 @@
+{
+  "audit_status": "approved",
+  "audit_type": "instrument_registry",
+  "audit_version": 1,
+  "generated_at": "2026-07-09T07:11:22Z",
+  "issue_count": 0,
+  "issues": [],
+  "item_count": 12,
+  "output_path": "..\\backtest_engine\\configs\\generated\\moex_forts_instrument_specs_audit.json",
+  "registry_path": "..\\backtest_engine\\configs\\generated\\moex_forts_instrument_specs.json",
+  "registry_sha256": "104b00e7f97fce5a121d81889a16f9542a8a8ab1e7a97e1929aad4a764162746",
+  "warning_count": 0,
+  "warnings": []
+}

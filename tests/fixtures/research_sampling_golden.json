@@ -1,0 +1,291 @@
+{
+  "sampling": [
+    {
+      "returns": [
+        0.01,
+        -0.02,
+        0.0,
+        0.03,
+        -0.005
+      ],
+      "seed": 42,
+      "block_length": 2,
+      "bootstrap": {
+        "run_id": "fixture",
+        "bootstrap_iterations": 31,
+        "bootstrap_mean_total_return": 0.02018997770625002,
+        "bootstrap_p05_total_return": -0.025047240100000034,
+        "bootstrap_p50_total_return": 0.014396530000000185,
+        "bootstrap_p95_total_return": 0.06851354885000005,
+        "bootstrap_probability_loss": 0.2903225806451613
+      },
+      "block_bootstrap": {
+        "run_id": "fixture",
+        "block_bootstrap_iterations": 29,
+        "block_length": 2,
+        "block_bootstrap_mean_total_return": 0.02457042627413796,
+        "block_bootstrap_p05_total_return": -0.016492776000000008,
+        "block_bootstrap_p50_total_return": 0.0194939999999999,
+        "block_bootstrap_p95_total_return": 0.08726336499999987,
+        "block_bootstrap_probability_loss": 0.27586206896551724
+      }
+    },
+    {
+      "returns": [
+        -0.1,
+        0.0,
+        0.1,
+        0.03
+      ],
+      "seed": 7,
+      "block_length": 20,
+      "bootstrap": {
+        "run_id": "fixture",
+        "bootstrap_iterations": 31,
+        "bootstrap_mean_total_return": 0.04130892580645175,
+        "bootstrap_p05_total_return": -0.17784999999999995,
+        "bootstrap_p50_total_return": 0.092727,
+        "bootstrap_p95_total_return": 0.24684450000000036,
+        "bootstrap_probability_loss": 0.3870967741935484
+      },
+      "block_bootstrap": {
+        "run_id": "fixture",
+        "block_bootstrap_iterations": 29,
+        "block_length": 4,
+        "block_bootstrap_mean_total_return": 0.01970000000000005,
+        "block_bootstrap_p05_total_return": 0.01970000000000005,
+        "block_bootstrap_p50_total_return": 0.01970000000000005,
+        "block_bootstrap_p95_total_return": 0.01970000000000005,
+        "block_bootstrap_probability_loss": 0.0
+      }
+    },
+    {
+      "returns": [
+        -1.0,
+        0.0,
+        0.01
+      ],
+      "seed": 1,
+      "block_length": 1,
+      "bootstrap": {
+        "run_id": "fixture",
+        "bootstrap_iterations": 31,
+        "bootstrap_mean_total_return": -0.639658064516129,
+        "bootstrap_p05_total_return": -1.0,
+        "bootstrap_p50_total_return": -1.0,
+        "bootstrap_p95_total_return": 0.020100000000000007,
+        "bootstrap_probability_loss": 0.6451612903225806
+      },
+      "block_bootstrap": {
+        "run_id": "fixture",
+        "block_bootstrap_iterations": 29,
+        "block_length": 1,
+        "block_bootstrap_mean_total_return": -0.6513689655172414,
+        "block_bootstrap_p05_total_return": -1.0,
+        "block_bootstrap_p50_total_return": -1.0,
+        "block_bootstrap_p95_total_return": 0.020100000000000007,
+        "block_bootstrap_probability_loss": 0.6551724137931034
+      }
+    },
+    {
+      "returns": [
+        -1.01,
+        0.01,
+        -0.05
+      ],
+      "seed": 5,
+      "block_length": 2,
+      "bootstrap": {
+        "run_id": "fixture",
+        "bootstrap_iterations": 31,
+        "bootstrap_mean_total_return": -0.6626386129032259,
+        "bootstrap_p05_total_return": -1.009595,
+        "bootstrap_p50_total_return": -0.999905,
+        "bootstrap_p95_total_return": -0.00030200000000008,
+        "bootstrap_probability_loss": 0.9354838709677419
+      },
+      "block_bootstrap": {
+        "run_id": "fixture",
+        "block_bootstrap_iterations": 29,
+        "block_length": 2,
+        "block_bootstrap_mean_total_return": -0.8036385862068965,
+        "block_bootstrap_p05_total_return": -1.010201,
+        "block_bootstrap_p50_total_return": -0.999899,
+        "block_bootstrap_p95_total_return": -0.03090500000000007,
+        "block_bootstrap_probability_loss": 1.0
+      }
+    },
+    {
+      "returns": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seed": 42,
+      "block_length": 2,
+      "bootstrap": {
+        "run_id": "fixture",
+        "bootstrap_iterations": 31,
+        "bootstrap_mean_total_return": 0.0,
+        "bootstrap_p05_total_return": 0.0,
+        "bootstrap_p50_total_return": 0.0,
+        "bootstrap_p95_total_return": 0.0,
+        "bootstrap_probability_loss": 0.0
+      },
+      "block_bootstrap": {
+        "run_id": "fixture",
+        "block_bootstrap_iterations": 29,
+        "block_length": 2,
+        "block_bootstrap_mean_total_return": 0.0,
+        "block_bootstrap_p05_total_return": 0.0,
+        "block_bootstrap_p50_total_return": 0.0,
+        "block_bootstrap_p95_total_return": 0.0,
+        "block_bootstrap_probability_loss": 0.0
+      }
+    }
+  ],
+  "pbo": [
+    {
+      "partitions": 4,
+      "matrix": [
+        [
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        [
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "expected": [
+        0.0,
+        6
+      ],
+      "reality": 0.03125
+    },
+    {
+      "partitions": 5,
+      "matrix": [
+        [
+          0.02,
+          0.01,
+          -0.02,
+          -0.01,
+          0.01
+        ],
+        [
+          -0.02,
+          -0.01,
+          0.02,
+          0.01,
+          0.01
+        ]
+      ],
+      "expected": [
+        0.6666666666666666,
+        6
+      ],
+      "reality": 0.84375
+    },
+    {
+      "partitions": 8,
+      "matrix": [
+        [
+          0.01,
+          -0.02,
+          0.03,
+          -0.04,
+          0.05,
+          -0.06,
+          0.07,
+          -0.08
+        ],
+        [
+          0.03,
+          -0.01,
+          0.02,
+          -0.04,
+          0.06,
+          -0.07,
+          0.08,
+          -0.09
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "expected": [
+        0.9428571428571428,
+        70
+      ],
+      "reality": 1.0
+    },
+    {
+      "partitions": 8,
+      "matrix": [
+        [
+          1.0,
+          1.000000000001,
+          1.000000000002,
+          1.000000000003,
+          1.000000000004,
+          1.000000000005,
+          1.000000000006,
+          1.000000000007,
+          1.000000000008,
+          1.000000000009,
+          1.00000000001,
+          1.000000000011
+        ],
+        [
+          1.0,
+          0.999999999999,
+          0.999999999998,
+          0.999999999997,
+          0.999999999996,
+          0.999999999995,
+          0.999999999994,
+          0.999999999993,
+          0.999999999992,
+          0.999999999991,
+          0.99999999999,
+          0.999999999989
+        ]
+      ],
+      "expected": [
+        0.8857142857142857,
+        70
+      ],
+      "reality": 0.03125
+    }
+  ]
+}

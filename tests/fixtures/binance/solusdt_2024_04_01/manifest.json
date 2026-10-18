@@ -1,0 +1,253 @@
+{
+  "responses": [
+    {
+      "name": "spot_klines",
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=SOLUSDT&interval=1h&startTime=1711929600000&endTime=1712015999999&limit=1000",
+      "params": {
+        "symbol": "SOLUSDT",
+        "interval": "1h",
+        "startTime": 1711929600000,
+        "endTime": 1712015999999,
+        "limit": 1000
+      },
+      "sha256": "9fc2ab6cb21d102244f66daa366631121b209bef92e18e7b3c2e7a5ae0fea8a8",
+      "bytes": 4204,
+      "count": 24,
+      "first": [
+        1711929600000,
+        "202.45000000",
+        "202.45000000",
+        "200.82000000",
+        "201.99000000",
+        "114644.21000000",
+        1711933199999,
+        "23122926.82810000",
+        21954,
+        "55650.57000000",
+        "11224779.15240000",
+        "0"
+      ],
+      "last": [
+        1712012400000,
+        "192.83000000",
+        "193.24000000",
+        "192.17000000",
+        "192.24000000",
+        "59768.16000000",
+        1712015999999,
+        "11526076.01970000",
+        12573,
+        "29454.36000000",
+        "5680422.03800000",
+        "0"
+      ],
+      "downloaded_at": "2026-10-08T14:48:13.076847+00:00"
+    },
+    {
+      "name": "perpetual_klines",
+      "url": "https://fapi.binance.com/fapi/v1/klines?symbol=SOLUSDT&interval=1h&startTime=1711929600000&endTime=1712015999999&limit=1000",
+      "params": {
+        "symbol": "SOLUSDT",
+        "interval": "1h",
+        "startTime": 1711929600000,
+        "endTime": 1712015999999,
+        "limit": 1000
+      },
+      "sha256": "65c92ce2584adcb36e11d683ed31da87bcc5337a60d98851e751faa744fc0e04",
+      "bytes": 3258,
+      "count": 24,
+      "first": [
+        1711929600000,
+        "202.6850",
+        "202.7220",
+        "201.0300",
+        "202.2760",
+        "648292",
+        1711933199999,
+        "130916987.3110",
+        94161,
+        "310664",
+        "62740091.1150",
+        "0"
+      ],
+      "last": [
+        1712012400000,
+        "192.9500",
+        "193.4310",
+        "192.2660",
+        "192.3550",
+        "249594",
+        1712015999999,
+        "48161314.0360",
+        35289,
+        "122292",
+        "23599256.5070",
+        "0"
+      ],
+      "downloaded_at": "2026-10-08T14:48:12.683033+00:00"
+    },
+    {
+      "name": "perpetual_marks",
+      "url": "https://fapi.binance.com/fapi/v1/markPriceKlines?symbol=SOLUSDT&interval=1h&startTime=1711929600000&endTime=1712015999999&limit=1000",
+      "params": {
+        "symbol": "SOLUSDT",
+        "interval": "1h",
+        "startTime": 1711929600000,
+        "endTime": 1712015999999,
+        "limit": 1000
+      },
+      "sha256": "d4d4d9393ff498ea10836ffc449d86a2fb41fdfc8b4da352c8f9afc3ddace508",
+      "bytes": 2761,
+      "count": 24,
+      "first": [
+        1711929600000,
+        "202.67800000",
+        "202.68500000",
+        "201.06100000",
+        "202.24970321",
+        "0",
+        1711933199999,
+        "0",
+        3600,
+        "0",
+        "0",
+        "0"
+      ],
+      "last": [
+        1712012400000,
+        "192.94900000",
+        "193.35014951",
+        "192.26600000",
+        "192.33300000",
+        "0",
+        1712015999999,
+        "0",
+        3600,
+        "0",
+        "0",
+        "0"
+      ],
+      "downloaded_at": "2026-10-08T14:48:12.693815+00:00"
+    },
+    {
+      "name": "perpetual_funding",
+      "url": "https://fapi.binance.com/fapi/v1/fundingRate?symbol=SOLUSDT&startTime=1711929600000&endTime=1712015999999&limit=1000",
+      "params": {
+        "symbol": "SOLUSDT",
+        "startTime": 1711929600000,
+        "endTime": 1712015999999,
+        "limit": 1000
+      },
+      "sha256": "9b2383589e8174e4d948a3f3b20b4b9fbc123fe5cd7a1f3e4eb128fd92967ac4",
+      "bytes": 373,
+      "count": 3,
+      "first": {
+        "symbol": "SOLUSDT",
+        "fundingTime": 1711929600000,
+        "fundingRate": "0.00083459",
+        "markPrice": "202.67800000",
+        "rateType": "Regular"
+      },
+      "last": {
+        "symbol": "SOLUSDT",
+        "fundingTime": 1711987200000,
+        "fundingRate": "0.00031429",
+        "markPrice": "188.21700000",
+        "rateType": "Regular"
+      },
+      "downloaded_at": "2026-10-08T14:48:12.693815+00:00"
+    }
+  ],
+  "symbol": "SOLUSDT",
+  "timeframe": "1h",
+  "date": "2024-04-01",
+  "purpose": "Offline return regression with real prices and declared test fee/filter/margin assumptions",
+  "historical_account_fees_verified": false,
+  "test_fee_bps": "10",
+  "test_quantity_step": "0.001",
+  "test_minimum_notional": "5",
+  "test_leverage": {
+    "spot": 1,
+    "perpetual": 5
+  },
+  "expected": {
+    "spot": {
+      "final_usdt": "997.3609075000000",
+      "total_return": "-0.0026390925000",
+      "fees_usdt": "0.2915925000000",
+      "funding_usdt": "0",
+      "fills": [
+        {
+          "hour": 1,
+          "quantity": "0.25",
+          "price": "202.00000000",
+          "notional": "50.5000000000",
+          "fee": "0.0505000000000"
+        },
+        {
+          "hour": 9,
+          "quantity": "0.25",
+          "price": "196.46000000",
+          "notional": "49.1150000000",
+          "fee": "0.0491150000000"
+        },
+        {
+          "hour": 17,
+          "quantity": "0.25",
+          "price": "189.42000000",
+          "notional": "47.3550000000",
+          "fee": "0.0473550000000"
+        },
+        {
+          "hour": 23,
+          "quantity": "-0.75",
+          "price": "192.83000000",
+          "notional": "144.6225000000",
+          "fee": "0.1446225000000"
+        }
+      ],
+      "golden_sha256": "6c99f31d7a7c54b5396253bccef20f2d2937a21dd7e6a50e9a336ea0a3c06734"
+    },
+    "perpetual": {
+      "final_usdt": "997.251141032265737825",
+      "total_return": "-0.002748858967734262175",
+      "fees_usdt": "0.291830500",
+      "funding_usdt": "0.051528467734262175",
+      "fills": [
+        {
+          "hour": 1,
+          "quantity": "0.25",
+          "price": "202.2740",
+          "notional": "50.568500",
+          "fee": "0.050568500"
+        },
+        {
+          "hour": 9,
+          "quantity": "0.25",
+          "price": "196.6370",
+          "notional": "49.159250",
+          "fee": "0.049159250"
+        },
+        {
+          "hour": 17,
+          "quantity": "0.25",
+          "price": "189.5610",
+          "notional": "47.390250",
+          "fee": "0.047390250"
+        },
+        {
+          "hour": 23,
+          "quantity": "-0.75",
+          "price": "192.9500",
+          "notional": "144.712500",
+          "fee": "0.144712500"
+        }
+      ],
+      "golden_sha256": "53a7cbd9522684e67140981ea4eb29a87c2a6899ae58714c3794ba8b2a00d528"
+    }
+  },
+  "oracle_method": "Independent Decimal cash/inventory worksheet from raw responses, calculated before executing the engine",
+  "funding_valuation": "Raw funding-event markPrice; not the mark candle close",
+  "historical_filters_verified": false,
+  "historical_margin_rules_verified": false
+}
