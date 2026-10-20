@@ -1,0 +1,19 @@
+{
+"limits": {
+	"columns": ["tradedate", "assetcode", "mr1", "mr2", "mr3", "lk1", "lk2", "title", "group_title", "updatetime"],
+	"data": [
+		["2026-01-12", "CNY", 0.080000, 0.100000, 0.120000, 1500000000, 7500000000, "на курс китайский юань – российский рубль", "Валюта", "2026-01-08 05:57:58"]
+	]
+},
+"limits.cursor": {
+	"columns": ["INDEX", "TOTAL", "PAGESIZE"],
+	"data": [
+		[0, 1, 1000]
+	]
+},
+"limits.dates": {
+	"columns": ["from", "till"],
+	"data": [
+		["2018-05-22", "2026-10-20"]
+	]
+}}

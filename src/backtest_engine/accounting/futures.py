@@ -22,6 +22,7 @@ class FuturesInstrumentSpec:
     tick_size: float | None = None
     tick_value: float | None = None
     initial_margin: float | None = None
+    max_contracts: float | None = None
     exchange_fee_per_contract: float = 0.0
 
 
@@ -161,7 +162,7 @@ def apply_contract_risk(
             scale=0.0,
             max_contracts=0.0,
         )
-    limits = []
+    limits = [] if instrument.max_contracts is None else [instrument.max_contracts]
     point_value = contract_point_value(instrument)
     if portfolio.max_position_notional is not None:
         limits.append(portfolio.max_position_notional / (fill_price * point_value))

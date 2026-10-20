@@ -137,7 +137,17 @@ def resolve_leg_instrument_specs(leg: MultiInstrumentLegConfig) -> MultiInstrume
     if leg.instrument_registry_path is None:
         return leg
     raw_registry = read_json_or_toml(leg.instrument_registry_path, "Instrument registry")
+    missing = raw_registry.get("historical_margin", {}).get("missing_coverage", [])
+    if missing:
+        raise ValueError("Historical margin coverage is incomplete: " + "; ".join(missing[:5]))
     specs = build_instrument_specs(raw_registry, MultiInstrumentInstrumentSpec)
+    if (leg.quality_approval_required or leg.catalog_enforcement == "strict") and any(
+        spec.margin_estimate_schedule for spec in specs
+    ):
+        raise ValueError(
+            f"Exact dated initial_margin rules are required for {leg.asset_id}; "
+            "research margin estimates require diagnostic mode"
+        )
     if "instruments" in raw_registry:
         combined = list(leg.specs)
         combined.extend(spec for spec in specs if spec not in combined)

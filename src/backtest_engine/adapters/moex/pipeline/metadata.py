@@ -9,6 +9,8 @@ from typing import Any
 import polars as pl
 from continuous_futures_builder.session_calendar import expected_calendar_issues, observe_sessions
 
+from backtest_engine.adapters.models import DatasetBuildRequest
+from backtest_engine.adapters.moex.pipeline.historical_registry import enrich_historical_registry
 from backtest_engine.adapters.moex.sessions import MOEX_SESSION_WINDOWS, session_window_payloads
 from backtest_engine.data.store import file_sha256
 
@@ -39,7 +41,11 @@ def attach_metadata_to_approval(
     }
     statuses = {registry_audit.get("status"), calendar_audit.get("status")}
     if statuses != {"approved"}:
-        approval["approval_status"] = "rejected" if "rejected" in statuses else "warning"
+        approval["approval_status"] = (
+            "rejected"
+            if "rejected" in statuses or approval.get("approval_status") == "rejected"
+            else "warning"
+        )
     write_json(approval_path, approval)
     manifest = read_json(manifest_path)
     manifest["approval_sha256"] = file_sha256(approval_path)
@@ -57,10 +63,19 @@ def write_moex_dataset_metadata(
     expected_calendar_path: Path | None = None,
     from_date: str | None = None,
     till_date: str | None = None,
+    request: DatasetBuildRequest | None = None,
 ) -> MoexDatasetMetadata:
     reports = output_root / "reports"
     reports.mkdir(parents=True, exist_ok=True)
     registry, registry_audit = instrument_registry_payload(instrument_rows)
+    if request is not None:
+        registry, registry_audit = enrich_historical_registry(
+            request,
+            reports,
+            pl.read_parquet(dataset_path, columns=["ts", "active_contract"]),
+            registry,
+            registry_audit,
+        )
     calendar, calendar_audit = calendar_payload(pl.read_parquet(dataset_path, columns=["ts"]))
     if expected_calendar_path is not None:
         calendar = read_json(expected_calendar_path)
@@ -119,7 +134,7 @@ def instrument_registry_payload(
             ),
             "metadata": market_metadata(row),
         }
-        for field in ("tick_size", "tick_value"):
+        for field in ("tick_size", "tick_value", "initial_margin"):
             if spec[field] is None:
                 warnings.append(f"{symbol}: {field} is missing in ISS metadata")
         instruments.append(spec)
@@ -128,7 +143,7 @@ def instrument_registry_payload(
     return (
         {"source": "moex_iss", "generated_at": generated_at, "instruments": instruments},
         {
-            "status": "approved" if not violations else "rejected",
+            "status": "rejected" if violations else "warning" if warnings else "approved",
             "generated_at": generated_at,
             "instrument_count": len(instruments),
             "violations": violations,

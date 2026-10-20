@@ -123,6 +123,7 @@ def build_moex_dataset(
         expected_calendar_path=request.calendar_path,
         from_date=request.from_date,
         till_date=request.till_date,
+        request=request,
     )
     quality = attach_metadata_to_approval(
         result.approval_path,

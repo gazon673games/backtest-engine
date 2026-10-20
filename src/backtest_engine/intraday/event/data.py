@@ -152,6 +152,13 @@ def resolve_event_config(
     resolved_instrument = infer_dataset_instrument(
         resolve_instrument_config(instrument), dataset_validation
     )
+    if (
+        config.dataset.quality_approval_required or config.dataset.catalog_enforcement == "strict"
+    ) and any(spec.margin_estimate_schedule for spec in resolved_instrument.specs):
+        raise DatasetValidationError(
+            "Research margin estimates cannot be used with Require approved data; "
+            "supply exact dated initial_margin rules or select diagnostic mode"
+        )
     execution_updates["trading_days_per_year"] = annualization_days(
         config.execution.trading_days_per_year, [session.calendar_path]
     )
@@ -209,6 +216,13 @@ def resolve_instrument_config(
     resolved = instrument
     for spec_path in spec_paths:
         raw_spec = read_json_or_toml(spec_path, "Instrument spec")
+        missing = raw_spec.get("historical_margin", {}).get("missing_coverage", [])
+        if missing:
+            raise DatasetValidationError(
+                "Historical margin coverage is incomplete: "
+                + "; ".join(missing[:5])
+                + "; rebuild with historical risk data or supply exact dated rules"
+            )
         specs = build_instrument_specs(raw_spec, IntradayEventInstrumentSpec)
         if "instruments" in raw_spec:
             resolved = resolved.model_copy(update={"specs": [*resolved.specs, *specs]})

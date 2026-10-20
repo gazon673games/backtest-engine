@@ -71,6 +71,25 @@ def test_moex_dataset_builder_writes_backtest_ready_parquet(
         ),
         encoding="utf-8",
     )
+    rules = tmp_path / "rules.json"
+    rules.write_text(
+        json.dumps(
+            {
+                "instruments": [
+                    {
+                        "symbol": "CRU4",
+                        "initial_margin": 1000,
+                        "contract_multiplier": 1000,
+                        "tick_size": 0.001,
+                        "tick_value": 1,
+                        "valid_from": "2024-01-01",
+                        "valid_to": "2024-09-19",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
     result = build_moex_dataset(
         DatasetBuildRequest(
             adapter_id="moex",
@@ -79,6 +98,7 @@ def test_moex_dataset_builder_writes_backtest_ready_parquet(
             board="RFUD",
             security="CRU4",
             calendar_path=calendar,
+            rules_path=rules,
             from_date="2024-01-02",
             till_date="2024-01-02",
             timeframe="5m",

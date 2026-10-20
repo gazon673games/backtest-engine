@@ -42,6 +42,7 @@ class MoexIssAdapter:
                 cache_policies=["prefer", "refresh", "offline", "network"],
                 roll_rules=["expiry", "volume"],
                 supports_offline=True,
+                supports_rule_archive=True,
                 default_delay_minutes=15,
                 provider_supports_realtime=True,
                 realtime_requires_subscription=True,

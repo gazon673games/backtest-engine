@@ -25,6 +25,7 @@ def futures_instrument_spec(
         tick_size=instrument.tick_size,
         tick_value=instrument.tick_value,
         initial_margin=instrument.initial_margin,
+        max_contracts=getattr(instrument, "maximum_quantity", None),
         exchange_fee_per_contract=instrument.exchange_fee_per_contract,
     )
 

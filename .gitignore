@@ -210,3 +210,8 @@ __pycache__/
 !/tests/test_funding_policy.py
 !/tests/test_research_evidence.py
 !/tests/test_quality_approval_values.py
+
+!/tests/moex_risk_fixture.py
+!/tests/test_moex_risk_history.py
+!/tests/test_moex_margin_registry.py
+!/tests/fixtures/moex_cny_risk_limits_20260112.json

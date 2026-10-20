@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 from backtest_engine.accounting.contract_support import validate_accounting_contract
 from backtest_engine.core.exceptions import DatasetValidationError
+from backtest_engine.data.margin_estimates import MarginEstimateInterval, resolve_margin_estimate
 from backtest_engine.data.session_model import parse_date_value
 
 
@@ -43,6 +44,8 @@ class InstrumentSpec(BaseModel):
     tick_size: float | None = Field(default=None, gt=0.0)
     tick_value: float | None = Field(default=None, gt=0.0)
     initial_margin: float | None = Field(default=None, ge=0.0)
+    maximum_quantity: float | None = Field(default=None, gt=0.0)
+    margin_estimate_schedule: list[MarginEstimateInterval] = Field(default_factory=list)
     exchange_fee_per_contract: float = Field(default=0.0, ge=0.0)
     base_currency: str | None = None
     quote_currency: str | None = None
@@ -56,6 +59,15 @@ class InstrumentSpec(BaseModel):
     maintenance_margin_rate: float | None = Field(default=None, ge=0.0, lt=1.0)
     liquidation_fee_bps: float = Field(default=0.0, ge=0.0)
     margin_tiers: list[MarginTierSpec] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _validate_margin_estimates(self) -> InstrumentSpec:
+        for previous, current in zip(
+            self.margin_estimate_schedule, self.margin_estimate_schedule[1:], strict=False
+        ):
+            if current.valid_from < previous.valid_to:
+                raise ValueError("Margin estimate intervals must be ordered and nonoverlapping")
+        return self
 
     @field_validator("asset_class")
     @classmethod
@@ -131,12 +143,12 @@ def select_instrument_spec[SpecT: InstrumentSpec](
         if spec.valid_to is not None and current_ts.date() > spec.valid_to:
             continue
         if any(fnmatch(symbol, spec.symbol) for symbol in symbols if symbol):
-            return resolved_spec(spec, fallback, row)
-    return resolved_spec(fallback, fallback, row)
+            return resolved_spec(spec, fallback, row, current_ts)
+    return resolved_spec(fallback, fallback, row, current_ts)
 
 
 def resolved_spec[SpecT: InstrumentSpec](
-    spec: SpecT, fallback: SpecT, row: dict[str, Any]
+    spec: SpecT, fallback: SpecT, row: dict[str, Any], current_ts: datetime
 ) -> SpecT:
     updates = {
         field: getattr(fallback, field)
@@ -169,7 +181,7 @@ def resolved_spec[SpecT: InstrumentSpec](
             f"Instrument {spec.symbol}: price_currency and pnl_currency are required"
         )
     updates.update(price_currency=price, pnl_currency=pnl)
-    resolved = spec.model_copy(update=updates)
+    resolved = resolve_margin_estimate(spec.model_copy(update=updates), row, current_ts)
     validate_accounting_contract(resolved)
     return resolved
 
