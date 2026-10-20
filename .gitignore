@@ -215,3 +215,6 @@ __pycache__/
 !/tests/test_moex_risk_history.py
 !/tests/test_moex_margin_registry.py
 !/tests/fixtures/moex_cny_risk_limits_20260112.json
+
+!/tests/test_pending_decision_slots.py
+!/tests/test_workbench_execution_inputs.py

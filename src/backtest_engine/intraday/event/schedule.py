@@ -93,6 +93,9 @@ def update_call_schedule_for_date(
     skipped_dates: set[date],
     bar_minutes: int | None = None,
 ) -> None:
+    if executable_row_count == 0:
+        return
+    horizon = row_available_at(rows[executable_row_count - 1])
     for decision_time in execution.decision_times:
         selected = select_decision_row(
             trading_date,
@@ -113,6 +116,10 @@ def update_call_schedule_for_date(
                     "choose a finer strategy timeframe"
                 )
             call_schedule[selected] = decision_time
+            continue
+        decision_at = datetime.combine(trading_date, decision_time, horizon.tzinfo)
+        # A future slot is pending, not a missing decision or a reason to skip this day.
+        if decision_at > horizon:
             continue
         if execution.missing_decision_policy == "skip":
             skipped_dates.add(trading_date)

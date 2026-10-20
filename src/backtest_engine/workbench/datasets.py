@@ -50,6 +50,10 @@ def register_workbench_dataset(
             "security": request.security,
             "instrument_mode": request.instrument_mode,
             "roll_rule": request.roll_rule,
+            "rules_enforcement": request.rules_enforcement,
+            "execution_input_issues": instrument_input_issues(
+                result.instrument_registry_audit_path
+            ),
             "built_at": datetime.now(UTC).isoformat(),
             "requested_from_date": request.from_date,
             "requested_till_date": request.till_date,
@@ -163,9 +167,22 @@ def discover_dataset_entries(root: Path) -> list[DataCatalogEntry]:
     return list(by_id.values())
 
 
+def instrument_input_issues(audit_path: Path | None) -> list[str]:
+    if audit_path is None:
+        return []
+    audit = read_json(audit_path)
+    return list(audit.get("historical_margin", {}).get("missing_coverage", []))
+
+
 def catalog_item(entry: DataCatalogEntry, catalog_path: Path) -> dict[str, Any]:
+    metadata = dict(entry.metadata)
+    if entry.instrument_registry_audit_path is not None:
+        metadata["execution_input_issues"] = instrument_input_issues(
+            entry.instrument_registry_audit_path
+        )
     return {
         **entry.model_dump(mode="json"),
+        "metadata": metadata,
         "catalog_path": str(catalog_path.resolve()),
         "exists": entry.dataset_path.exists(),
         "built_at": entry.metadata.get("built_at"),
